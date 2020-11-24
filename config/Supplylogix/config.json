@@ -1,0 +1,16 @@
+{
+  "account":"aws_cas2",
+  "warehouse":"RADX_WH",
+  "database":"gsitzman_db",
+  "schema":"supplylogix", 
+  "role": "SYSADMIN",
+  "debug":"true" ,
+  "username":"RRadhak",
+  "password":"*****18",
+  "stage": "json_stg",
+  "environment":"dev",
+  "connection_method":"1",
+  "PrivateKeyPhrase":"*******18",
+  "PrivateKeyLocation":"/Users/rradhakrishnam/rsa_key.p8",
+  "format_name":"gsitzman_db.supplylogix.json_ff" 
+}

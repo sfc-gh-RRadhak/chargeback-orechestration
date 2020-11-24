@@ -1,0 +1,15 @@
+
+acquisition:
+  comment: Loads derivation SQL to SF
+  operation:
+    - step: 1
+      load_type: execute
+      load_name: login_history_acq
+      load_sql:  "sql/monitoring/100_acquisition/login_history_acq.sql" 
+    - step: 1
+      load_type: execute
+      load_name: query_history_acq
+      load_sql:  "sql/monitoring/100_acquisition/query_history_acq.sql" 
+   
+     
+   

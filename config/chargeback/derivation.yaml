@@ -1,0 +1,36 @@
+
+derivation:
+  comment: Loads derivation SQL to SF
+  operation:
+    - step: 1
+      load_type: execute
+      load_name: be_resource_mapping_s_ld
+      load_sql:  "sql/chargeback/310_derivation/be_resource_mapping_s_ld.sql" 
+    - step: 1
+      load_type: execute
+      load_name: sf_compute_cost_s_ld
+      load_sql:  "sql/chargeback/310_derivation/sf_compute_cost_s_ld.sql" 
+    - step: 1
+      load_type: execute
+      load_name: sf_data_xfer_cost_lkp_ld
+      load_sql:  "sql/chargeback/310_derivation/sf_data_xfer_cost_lkp_ld.sql" 
+    - step: 1
+      load_type: execute
+      load_name: sf_storage_cost_s_ld
+      load_sql:  "sql/chargeback/310_derivation/sf_storage_cost_s_ld.sql" 
+    - step: 2
+      load_type: execute
+      load_name: cb_resource_consumption_ms_ld
+      load_sql:  "sql/chargeback/310_derivation/cb_resource_consumption_ms_ld.sql" 
+        
+    - step: 3
+      load_type: execute
+      load_name: cb_account_consumption_fcst_ms_ld
+      load_sql:  "sql/chargeback/310_derivation/cb_account_consumption_fcst_ms_ld.sql" 
+
+    - step: 4
+      load_type: execute
+      load_name: cb_account_consumption_ms_ld
+      load_sql:  "sql/chargeback/310_derivation/cb_account_consumption_ms_ld.sql" 
+
+ 

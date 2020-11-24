@@ -1,0 +1,17 @@
+fact:
+  comment: Loads fact SQL to SF
+  operation:
+    - step: 1
+      load_type: execute
+      load_name: cb_resource_mf_ld
+      load_sql:  "sql/chargeback/410_fact/cb_resource_mf_ld.sql" 
+    - step: 1
+      load_type: execute
+      load_name: cb_account_mf_ld
+      load_sql:  "sql/chargeback/410_fact/cb_account_mf_ld.sql" 
+    - step: 2
+      load_type: execute
+      load_name: cb_account_mf_fcst_ld
+      load_sql:  "sql/chargeback/410_fact/cb_account_mf_fcst_ld.sql" 
+
+ 

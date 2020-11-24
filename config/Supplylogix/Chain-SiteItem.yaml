@@ -1,0 +1,42 @@
+ChainItem:
+  comment: Loads json data to   SF
+  operation:
+    - step: 1
+      load_type: execute
+      load_name: chain_item_json_stg_ld   -1
+      load_sql:  "sql/Supplylogix/ChainItem/chain_item_json_stg_ld.sql" 
+    
+    - step: 1
+      load_type: execute
+      load_name: site_item_json_stg_ld
+      load_sql:  "sql/Supplylogix/SiteItem/site_item_json_stg_ld.sql" 
+     
+    - step: 2
+      load_type: execute
+      load_name: chain_item_json_ld  
+      load_sql:  "sql/Supplylogix/ChainItem/chain_item_json_ld.sql" 
+    
+    - step: 2
+      load_type: execute
+      load_name: site_item_json_ld
+      load_sql:  "sql/Supplylogix/SiteItem/site_item_json_ld.sql" 
+
+    - step: 3
+      load_type: execute
+      load_name: chain_item_ld  
+      load_sql:  "sql/Supplylogix/ChainItem/chain_item_ld.sql" 
+    
+    - step: 3
+      load_type: execute
+      load_name: site_item_ld
+      load_sql:  "sql/Supplylogix/SiteItem/site_item_ld.sql" 
+    
+    - step: 4
+      load_type: execute
+      load_name: site_item_inventory_snapshot_ld
+      load_sql:  "sql/Supplylogix/SiteItem/site_item_inventory_snapshot_ld.sql" 
+    
+    - step: 5
+      load_type: execute
+      load_name: site_item_dispense_ld
+      load_sql:  "sql/Supplylogix/SiteItem/site_item_dispense_ld.sql"

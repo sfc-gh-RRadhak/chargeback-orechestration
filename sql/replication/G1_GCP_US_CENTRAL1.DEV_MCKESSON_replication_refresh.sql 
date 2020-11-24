@@ -1,0 +1,3 @@
+
+--- Secondary account refresh script 
+alter database POC_COMP_DB  refresh ;

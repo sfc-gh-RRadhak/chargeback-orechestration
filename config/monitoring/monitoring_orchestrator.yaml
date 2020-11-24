@@ -1,0 +1,5 @@
+operation:
+    - load_name: acquisition
+      script: "python3 orchestration_load.py acquisition config/monitoring/config.json --minutes 2000 --load_config config/monitoring/acquisition.yaml --source_db_config config/monitoring/source_config.json --logfilepath './'"
+    - load_name: raw
+      script: "python3 orchestration_load.py raw config/monitoring/config.json --load_config 'config/monitoring/raw.yaml' --logfilepath './'"

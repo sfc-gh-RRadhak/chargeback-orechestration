@@ -1,0 +1,13 @@
+operation:
+    - load_name: acquisition
+      script: "python3 orchestration_load.py acquisition config/chargeback/config.json --minutes 1740 --load_config config/chargeback/acquisition.yaml --source_db_config config/chargeback/source_config.json --logfilepath './'"
+    - load_name: raw
+      script: "python3 orchestration_load.py raw config/chargeback/config.json --load_config 'config/chargeback/raw.yaml' --logfilepath './'"
+    - load_name: integration
+      script: "python3 orchestration_load.py integration config/chargeback/config.json --load_config 'config/chargeback/integration.yaml' --logfilepath './'"
+    - load_name: derivation
+      script: "python3 orchestration_load.py derivation config/chargeback/config.json --load_config 'config/chargeback/derivation.yaml' --logfilepath './'"
+    - load_name: dimension
+      script: "python3 orchestration_load.py dimension config/chargeback/config.json --load_config 'config/chargeback/dimension.yaml' --logfilepath './'"
+    - load_name: fact
+      script: "python3 orchestration_load.py fact config/chargeback/config.json --load_config 'config/chargeback/fact.yaml' --logfilepath './'"

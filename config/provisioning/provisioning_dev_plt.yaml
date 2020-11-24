@@ -1,0 +1,22 @@
+provisioning_dev_plt:
+  comment: Initial set run for the provisioning_dev_plt
+  operation:
+    - step: 1
+      load_type: execute
+      load_name: 1_dev_plt_local_admin_accounts
+      load_sql:  "sql/provisioning/provisioning_dev_plt/1_dev_plt_local_admin_accounts.sql" 
+    - step: 2
+      load_type: execute
+      load_name: 2_dev_plt_wh_access_roles
+      load_sql:  "sql/provisioning/provisioning_dev_plt/2_dev_plt_wh_access_roles.sql" 
+    - step: 3
+      load_type: execute
+      load_name: 3_dev_plt_database_access_roles
+      load_sql:  "sql/provisioning/provisioning_dev_plt/3_dev_plt_database_access_roles.sql" 
+    - step: 4
+      load_type: execute
+      load_name: 4_dev_plt_functional_roles
+      load_sql:  "sql/provisioning/provisioning_dev_plt/4_dev_plt_functional_roles.sql" 
+
+
+ 

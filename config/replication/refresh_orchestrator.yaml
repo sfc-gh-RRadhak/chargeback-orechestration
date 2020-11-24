@@ -1,0 +1,4 @@
+operation:
+    - load_name: replication 
+      script: "python3 orchestration_load.py replication config/replication/config.json --load_config 'config/replication/refresh.yaml' "  
+  

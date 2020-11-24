@@ -1,0 +1,16 @@
+{
+ "account":"mckesson.us-central1.gcp",
+  "warehouse":"dev_plt_elt_service_wh",
+  "database":"dev_plt_rl_snowflake_db",
+  "schema":"ACCOUNT_USAGE",
+  "role": "dev_plt_elt_service_fr",
+  "debug":"true",
+  "username":"dev_plt_elt_service_au",
+  "password":"***",
+  "stage": "dev_plt_common_db.util.monitoring_usage_stg",
+  "environment":"dev",
+  "connection_method":"1",
+  "PrivateKeyPhrase":"MCKESSON",
+  "PrivateKeyLocation":"/Users/sam.andersonmckesson.com/rsa/rsa_key.p8"
+ 
+}

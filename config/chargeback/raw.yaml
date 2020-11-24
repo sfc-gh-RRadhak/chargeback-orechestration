@@ -1,0 +1,62 @@
+
+raw:
+  comment: List of raw loads that takes the acquisition files from the stage location to the raw stage tables in SF
+  operation:
+    
+    - step: 1
+      load_type: execute
+      load_name: be_resource_mapping_lkp_ld
+      load_sql:  "sql/chargeback/200_raw/be_resource_mapping_lkp_ld.sql" 
+    - step: 1
+      load_type: execute
+      load_name: cb_service_type_lkp_ld
+      load_sql:  "sql/chargeback/200_raw/cb_service_type_lkp_ld.sql" 
+    - step: 1
+      load_type: execute
+      load_name: sf_compute_cost_lkp_ld
+      load_sql:  "sql/chargeback/200_raw/sf_compute_cost_lkp_ld.sql" 
+    - step: 1
+      load_type: execute
+      load_name: sf_data_xfer_cost_lkp_ld
+      load_sql:  "sql/chargeback/200_raw/sf_data_xfer_cost_lkp_ld.sql" 
+    - step: 1
+      load_type: execute
+      load_name: sf_storage_cost_lkp_ld
+      load_sql:  "sql/chargeback/200_raw/sf_storage_cost_lkp_ld.sql" 
+
+    - step: 2
+      load_type: copy_into
+      load_name: automatic_clustering_history_stg_ld_sp
+      load_sql:  "sql/chargeback/200_raw/automatic_clustering_history_stg_ld_sp.sql" 
+    - step: 2
+      load_type: copy_into
+      load_name: data_transfer_history_stg_ld_sp
+      load_sql:  "sql/chargeback/200_raw/data_transfer_history_stg_ld_sp.sql" 
+    - step: 2
+      load_type: copy_into
+      load_name: database_storage_usage_history_stg_ld_sp
+      load_sql:  "sql/chargeback/200_raw/database_storage_usage_history_stg_ld_sp.sql" 
+    - step: 2
+      load_type: copy_into
+      load_name: warehouse_metering_history_stg_ld_sp
+      load_sql:  "sql/chargeback/200_raw/warehouse_metering_history_stg_ld_sp.sql" 
+    - step: 3
+      load_type: execute
+      load_name: dw_delta_date_ld
+      load_sql:  "sql/chargeback/200_raw/dw_delta_date_ld.sql" 
+    - step: 4
+      load_type: execute
+      load_name: automatic_clustering_history_ld_sp
+      load_sql:  "sql/chargeback/200_raw/automatic_clustering_history_ld_sp.sql" 
+    - step: 4
+      load_type: execute
+      load_name: data_transfer_history_ld_sp
+      load_sql:  "sql/chargeback/200_raw/data_transfer_history_ld_sp.sql" 
+    - step: 4
+      load_type: execute
+      load_name: database_storage_usage_history_ld_sp
+      load_sql:  "sql/chargeback/200_raw/database_storage_usage_history_ld_sp.sql" 
+    - step: 4
+      load_type: execute
+      load_name: warehouse_metering_history_ld_sp
+      load_sql:  "sql/chargeback/200_raw/warehouse_metering_history_ld_sp.sql" 

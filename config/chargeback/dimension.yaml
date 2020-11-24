@@ -1,0 +1,21 @@
+dimension:
+  comment: Loads dimension SQL to SF
+  operation:
+    - step: 1
+      load_type: execute
+      load_name: cb_account_dm_ld
+      load_sql:  "sql/chargeback/400_dimension/cb_account_dm_ld.sql" 
+    - step: 1
+      load_type: execute
+      load_name: cb_resource_dm_ld
+      load_sql:  "sql/chargeback/400_dimension/cb_resource_dm_ld.sql" 
+    - step: 1
+      load_type: execute
+      load_name: cb_service_type_dm_ld
+      load_sql:  "sql/chargeback/400_dimension/cb_service_type_dm_ld.sql" 
+    - step: 1
+      load_type: execute
+      load_name: date_dm_ld
+      load_sql:  "sql/chargeback/400_dimension/date_dm_ld.sql" 
+     
+ 

@@ -1,0 +1,19 @@
+
+integration:
+  comment: Loads integration SQL to SF
+  operation:
+    - step: 1
+      load_type: execute
+      load_name: cb_account_h_ld
+      load_sql:  "sql/chargeback/300_integration/cb_account_h_ld.sql" 
+    - step: 1
+      load_type: execute
+      load_name: cb_resource_h_ld
+      load_sql:  "sql/chargeback/300_integration/cb_resource_h_ld.sql" 
+    - step: 2
+      load_type: execute
+      load_name: cb_account_resource_l_ld
+      load_sql:  "sql/chargeback/300_integration/cb_account_resource_l_ld.sql" 
+     
+
+ 

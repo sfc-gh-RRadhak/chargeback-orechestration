@@ -1,0 +1,19 @@
+{
+ "snowflake_connection":[
+
+         {  "account":"aws_cas2",
+            "warehouse":"RADX_WH",
+            "database":"gsitzman_db",
+            "schema":"ACCOUNT_USAGE", 
+            "role": "SYSADMIN",
+            "debug":"true" ,
+            "username":"RRadhak",
+            "password":"Summer**18",
+            "stage": "json_stg",
+            "environment":"dev",
+            "connection_method":"1",
+            "PrivateKeyPhrase":"Summer**18",
+            "PrivateKeyLocation":"/Users/rradhakrishnam/rsa_key.p8"
+        }
+    ]
+ }

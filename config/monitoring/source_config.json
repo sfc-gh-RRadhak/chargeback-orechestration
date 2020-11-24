@@ -1,0 +1,21 @@
+{
+ "snowflake_connection":[
+       {
+              
+                     "account":"sf account",
+                      "warehouse":"XXXX_wh",
+                      "database":"XXXX_db",
+                      "schema":"XXXXX",
+                      "role": "XXXX_fr",
+                      "debug":"true",
+                      "username":"XXXXX_au",
+                      "password":"***",
+                      "stage": "xxxxx_db.util.xxxx_stg",
+                      "environment":"dev",
+                      "connection_method":"1",
+                      "PrivateKeyPhrase":"xxxxx",
+                      "PrivateKeyLocation":"xxxx.p8"
+       }
+        
+        ]
+ }

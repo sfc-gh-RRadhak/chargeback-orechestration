@@ -1,0 +1,3 @@
+operation:
+    - load_name: provisioning 
+      script: "python3 orchestration_load.py provisioning_dev_plt config/provisioning/config.json --load_config 'config/provisioning/provisioning_dev_plt.yaml'"

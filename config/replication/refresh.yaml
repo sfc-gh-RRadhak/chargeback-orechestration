@@ -1,0 +1,12 @@
+refresh:
+  comment: Loads dimension SQL to SF
+  operation:
+    - step: 1
+      load_type: execute
+      load_name: DEV_MCKESSON_replication_refresh
+      load_sql:  "sql/replication/G1_GCP_US_CENTRAL1.DEV_MCKESSON_replication_refresh.sql" 
+
+
+ 
+
+ 

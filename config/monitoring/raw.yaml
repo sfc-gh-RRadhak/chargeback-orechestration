@@ -1,0 +1,19 @@
+raw:
+  comment: Loads raw SQL to SF
+  operation:
+    - step: 1
+      load_type: execute
+      load_name: login_history_stg_ld_sp
+      load_sql:  "sql/monitoring/200_raw/login_history_stg_ld_sp.sql" 
+    - step: 2
+      load_type: execute
+      load_name: login_history_tbl_ld_sp
+      load_sql:  "sql/monitoring/200_raw/login_history_tbl_ld_sp.sql" 
+    - step: 1
+      load_type: execute
+      load_name: query_history_stg_ld_sp
+      load_sql:  "sql/monitoring/200_raw/query_history_stg_ld_sp.sql"      
+    - step: 2
+      load_type: execute
+      load_name: query_history_tbl_ld_sp
+      load_sql:  "sql/monitoring/200_raw/query_history_tbl_ld_sp.sql" 
