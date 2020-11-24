@@ -10,11 +10,11 @@ acquisition:
       load_type: execute
       load_name: database_storage_usage_history
       load_sql:  "sql/chargeback/100_acquisition/database_storage_usage_history.sql" 
-    - step: 1
+    - step: 2
       load_type: execute
       load_name: automatic_clustering_history
       load_sql:  "sql/chargeback/100_acquisition/automatic_clustering_history.sql" 
-    - step: 1
+    - step: 2
       load_type: execute
       load_name: data_transfer_history
       load_sql:  "sql/chargeback/100_acquisition/data_transfer_history.sql" 

@@ -16,6 +16,7 @@ import traceback
 import json
 import logging
 import yaml
+import copy
 file_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(file_path + "/..")
 LOG_FORMAT = (
@@ -86,6 +87,7 @@ parameters dictionary variable:  parameter variable is constructed in the progra
 class Orchestration_Load():
     def __init__( self,log=None):
         self.log=log
+        self._thread_max_count=5
 
     " read the configuration files and stores them to  a variable"
     def read_config(self, config_file):
@@ -136,7 +138,7 @@ class Orchestration_Load():
 
     def load_execution(self,dbconn,parameter):
         try:
-            stored_proc_list=['storedproc','storedprocedure']
+            stored_proc_list=['storedproc','storedprocedure','function']
             file_name=get_file_name(parameter)
             parameter['fileName']=file_name
             load_sql_file_path=f"{parameter['file_path']}/{parameter['load_sql']}"
@@ -155,7 +157,7 @@ class Orchestration_Load():
                             sql=sql+line.format(**parameter)
                         if is_procedure==0: #Reqular lines before the create or replace procedure
                             sql=sql+line .format(**parameter)
-                        elif is_procedure==1 and str('create or replace procedure').strip().upper() not in line.strip().upper(): # now processing the rest of the lines
+                        elif is_procedure==1 and str('create or replace ').strip().upper() not in line.strip().upper(): # now processing the rest of the lines
                             sql=sql+line
                 else:
                     sql=str(f.read()).format(**parameter)
@@ -191,9 +193,9 @@ class Orchestration_Load():
                 object_list=yaml.load(file,Loader=yaml.FullLoader)
 
             operation_list= object_list[load]['operation']
-            print(operation_list)
+            #print(operation_list)
             copy_list = sorted(operation_list, key=itemgetter('step'))
-            print("copy_list",copy_list)
+            #print("copy_list",copy_list)
             for key, value in it.groupby(copy_list, key=itemgetter('step')):
                     l=[]
                     for i in value:
@@ -204,16 +206,89 @@ class Orchestration_Load():
                         l.append(s)
                     ll.append(l)
             #print ('ll',ll)
+            #print ( f"""TEST  ---->{file_item for file_item in ll}""")
              
-            for item in ll:
+            try:
+                for item in ll:
+                    print(f"""main thread {item} """ )
+                    with futures.ThreadPoolExecutor(max_workers=self._thread_max_count) as executor:
+                        future_by_threads = {executor.submit(
+                                self.load_execution_thread,dbconn,parameter,file_item['load_type'], file_item['load_name'],file_item['load_sql']):
+                                                    file_item for file_item in item
+                                                    }
+                        for future in futures.as_completed(future_by_threads):
+                            exception = future.exception()
+                            if exception:
+                                raise exception
+            except Exception as e:
+                logging.error(f"(Error Code: {str(e)}")
+                logging.error(f"{e}\n{traceback.format_exc()}")
+                raise
+            '''for item in ll:
                 for i in item:
                     parameter['load_type']=i['load_type']
                     parameter['load_name']=i['load_name']
                     parameter['load_sql']=i['load_sql']
                     self.load_execution(dbconn,parameter)
+            '''
  
         except Exception as e:
             self.log.error(f"error in snowflake_acquistion_load :  Error Code {str(e)} ")
+            self.log.error(f"{e}\n{traceback.format_exc()}")
+            raise 
+
+    def load_execution_thread(self,dbconn,parameter,load_type,load_name,load_sql):
+        try:
+           
+            stored_proc_list=['storedproc','storedprocedure','function']
+            parameter_new = copy.deepcopy(parameter)
+            parameter_new['load_type']=load_type
+            parameter_new['load_name']=load_name
+            parameter_new['load_sql']=load_sql
+            file_name=get_file_name(parameter_new)
+            
+
+            parameter_new['fileName']=file_name
+            load_sql_file_path=f"{parameter_new['file_path']}/{parameter_new['load_sql']}"
+            self.log.info("load_sql_file_path-->{load_sql_file_path}")
+            print ( f""" Thread {parameter_new}""")
+
+             
+            sql=''
+            is_procedure=0 # looking for the procedure keyword
+
+            with open( load_sql_file_path,"r") as f:
+                if parameter_new['load_type'].lower() in stored_proc_list:
+                    lines = f.readlines() 
+                    for line in lines:
+                         
+                        if str('create or replace procedure').strip().upper()  in line.strip().upper():
+                            is_procedure=1  # first time it found the create or replace procedure
+                            sql=sql+line.format(**parameter_new)
+                        if is_procedure==0: #Reqular lines before the create or replace procedure
+                            sql=sql+line .format(**parameter_new)
+                        elif is_procedure==1 and str('create or replace ').strip().upper() not in line.strip().upper(): # now processing the rest of the lines
+                            sql=sql+line
+                else:
+                    sql=str(f.read()).format(**parameter_new)
+             
+            self.log.info("********parameter********>")
+            self.log.info(f'parameter-->{parameter_new}')
+            self.log.info(sql)
+            self.log.info("****************")
+            
+            if parameter_new['load_type'].lower()=='execute':
+                sql_list=sql.split(';')
+                for sql in sql_list:
+                    dbconn.execute(sql)
+            elif parameter['load_type'].lower() in stored_proc_list:
+                print("parameter_new['load_type']-->",parameter_new['load_type'].lower()) 
+                dbconn.execute_stream(sql) 
+            else:
+                 self.log.info(f"""{parameter_new['load_type']}  is not present in the yaml""")
+
+        except Exception as e:
+            self.log.error(f"error in load_execution :  Error Code {str(e)} ")
             self.log.error(f"{e}\n{traceback.format_exc()}")
             raise 
 
