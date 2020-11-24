@@ -9,7 +9,7 @@
             "debug":"true" ,
             "username":"RRadhak",
             "password":"Summer**18",
-            "stage": "json_stg",
+            "stage": "radx_db.public.RADXSTAGE",
             "environment":"dev",
             "connection_method":"1",
             "PrivateKeyPhrase":"Summer**18",
