@@ -1,4 +1,0 @@
-operation:
-    - load_name: ChainItem 
-      script: "python3 orchestration_load.py ChainItem config/Supplylogix/config.json --load_config 'config/Supplylogix/Chain-SiteItem.yaml' "  
-    

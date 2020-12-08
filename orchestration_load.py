@@ -330,12 +330,10 @@ def parse_args():
 
 """
 Chargeback:
-python3 orchestration_load.py acquisition config/chargeback/config.json --minutes 20 --load_config config/chargeback/acquisition.yaml --source_db_config config/chargeback/source_config.json
-python3 orchestration_load.py raw config/chargeback/config.json --load_config 'config/chargeback/raw.yaml'                           
-python3 orchestration_load.py integration config/chargeback/config.json --load_config 'config/chargeback/integration.yaml'
-python3 orchestration_load.py derivation config/chargeback/config.json --load_config 'config/chargeback/derivation.yaml'
-python3 orchestration_load.py dimension config/chargeback/config.json --load_config 'config/chargeback/dimension.yaml'
-python3 orchestration_load.py fact config/chargeback/config.json --load_config 'config/chargeback/fact.yaml'
+#python3 orchestration_load.py acquisition config/chargeback/config.json --minutes 20 --load_config config/chargeback/acquisition.yaml --source_db_config config/chargeback/source_config.json
+python3 orchestration_load.py raw config/map_ingestion//dev_config.json --load_config 'config/chargeback/raw.yaml' --stage_file_path_pattern 20201207 --logfilepath /Users/rradhakrishnam/Documents/Project/chargeback-orechestration/log/                          
+python3 orchestration_load.py dimension config/map_ingestion/dev_config.json --load_config 'config/map_ingestion/dimension.yaml' --logfilepath /Users/rradhakrishnam/Documents/Project/chargeback-orechestration/log/ 
+python3 orchestration_load.py fact config/map_ingestion//config.json --load_config 'config/chargeback/fact.yaml'
 
 Monitoring :
 python3 orchestration_load.py acquisition config/monitoring/config.json --minutes 20 --load_config config/monitoring/acquisition.json --source_db_config config/monitoring/source_config.json --logfilepath /Users/rradhakrishnam/Desktop/code/log/
@@ -343,6 +341,7 @@ python3 orchestration_load.py acquisition config/monitoring/config.json --minute
 """
 
 def main():
+    
 
     args = parse_args()
     (len(vars(args)))

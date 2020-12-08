@@ -42,7 +42,7 @@ def main():
         load_config=f'{file_path}/{args.load_config}' 
         stage_file_path_pattern=args.stage_file_path_pattern
         if stage_file_path_pattern=="0000/00/00":
-            stage_file_path_pattern=datetime.today().strftime('%Y/%m/%d')
+            stage_file_path_pattern=datetime.today().strftime('%Y%m%d')
         
         print("stage_file_path_pattern--",stage_file_path_pattern)
             

@@ -268,9 +268,10 @@ class SnowflakeDB():
         properties = self.cur.execute("SELECT * FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))").fetchone()
         return {"name": properties[1], "url": properties[4]}
 
-def main():
-    dbconn=SnowflakeDB(config_file='/Users/rradhakrishnam/Desktop/code/mck_env/code/dna-snowflake/config/chargeback/config.json')
-    dbconn.validate()
+     
 
+def main():
+    dbconn=SnowflakeDB(config_file='/Users/rradhakrishnam/Documents/Project/chargeback-orechestration/config/map_raw_ingestion/config.json')
+    dbconn.validate()
 
 if __name__ == '__main__': main()

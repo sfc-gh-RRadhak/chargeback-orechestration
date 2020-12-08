@@ -1,0 +1,9 @@
+
+dimension:
+  comment: List of raw loads that takes the acquisition files from the stage location to the raw stage tables in SF
+  operation:
+    - step: 1
+      load_type: execute
+      load_name: dim dim load country
+      load_sql:  "sql/map_ingestion/200_dimension/dim_country_load.sql" 
+     

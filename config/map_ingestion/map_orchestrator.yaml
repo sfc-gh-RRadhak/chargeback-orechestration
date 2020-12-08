@@ -1,0 +1,8 @@
+operation:
+    - load_name: raw
+      script: "python3 orchestration_load.py raw config/map_ingestion/dev_config.json --load_config 'config/map_ingestion/raw.yaml'  --logfilepath /Users/rradhakrishnam/Documents/Project/chargeback-orechestration/log/"
+    - load_name: dimension
+      script: "python3 orchestration_load.py dimension config/map_ingestion/dev_config.json --load_config 'config/map_ingestion/dimension.yaml' --logfilepath /Users/rradhakrishnam/Documents/Project/chargeback-orechestration/log/"
+    
+
+      
